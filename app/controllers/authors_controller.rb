@@ -10,6 +10,7 @@ class AuthorsController < ApplicationController
   # GET /authors/1
   # GET /authors/1.json
   def show
+    @author = Author.find(params[:id])
   end
 
   # GET /authors/new
@@ -27,7 +28,7 @@ class AuthorsController < ApplicationController
    Author.create(author_params)
 
     respond_to do |format|
-      if @author.save
+      if @author.present?
         format.html { redirect_to authors_path, notice: 'Author was successfully created.' }
         format.json { render :show, status: :created, location: @author }
       else
